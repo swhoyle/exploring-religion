@@ -13,13 +13,3 @@ st.markdown("""
 4. **<u>Belief Comparisons</u>**: What similarities and differences exist among major religious beliefs and practices?  
 5. **<u>Branches of Religions</u>**: What are sub-religions or denominations within major religions?  
 """, unsafe_allow_html=True)
-
-st.subheader("Data")
-st.write(f"https://www.kaggle.com/datasets/umichigan/world-religions")
-gtab, ntab, rtab = st.tabs(["global.csv", "national.csv", "regional.csv"])
-with gtab:
-    st.dataframe(session.rdf.style.format({"year": "{:.0f}"}), hide_index=True)
-with ntab:
-    st.dataframe(session.ndf.style.format({"year": "{:.0f}"}), hide_index=True)
-with rtab:
-    st.dataframe(session.rdf.style.format({"year": "{:.0f}"}), hide_index=True)

@@ -2,7 +2,7 @@ import streamlit as st
 
 session = st.session_state
 
-st.title("Data")
+st.title(":material/database: Data")
 st.write(f"https://www.kaggle.com/datasets/umichigan/world-religions")
 gtab, ntab, rtab = st.tabs(["global.csv", "national.csv", "regional.csv"])
 with gtab:
