@@ -28,7 +28,7 @@ with fil:
 if label == "Religious Affiliation":
 
     df = cdf.groupby(["Country", "Country Code"])["Followers"].sum().reset_index()
-    df["Percent"] = round((df["Followers"] / df["Followers"].sum()) * 100,2)
+    df["Percent"] = (df["Followers"] / df["Followers"].sum())
     df["Formatted_Followers"] = df["Followers"].apply(format_followers)
     df["Formatted_Percent"] = df["Percent"].apply(format_percent)
 
@@ -69,7 +69,7 @@ else:
     religion_counts = df_most_popular["Religion"].value_counts()
     sorted_religions = religion_counts.index.tolist()
     religion_counts_df = religion_counts.reset_index()
-    religion_counts_df["Percent"] =  round((religion_counts_df["count"] / religion_counts_df["count"].sum()) * 100,2)
+    religion_counts_df["Percent"] =  (religion_counts_df["count"] / religion_counts_df["count"].sum())
     religion_counts_df["Formatted_Percent"] = religion_counts_df["Percent"].apply(format_percent)
     religion_counts_df = religion_counts_df.rename(columns = {"count": "Number of Countries", "Formatted_Percent": "%"})
     fig = px.choropleth(df_most_popular, 

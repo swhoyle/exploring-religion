@@ -23,7 +23,7 @@ if country != "All Countries":
     cdf = cdf[cdf["Country"] == country]
 df = cdf[cdf["Year"] == year].groupby("Religion")["Followers"].sum().reset_index()
 df = df.sort_values(by=sortby, ascending=sortby == "Followers") 
-df["Percent"] = round((df["Followers"] / df["Followers"].sum()) * 100,2)
+df["Percent"] = (df["Followers"] / df["Followers"].sum())
 df["Formatted_Followers"] = df["Followers"].apply(format_followers)
 df["Formatted_Percent"] = df["Percent"].apply(format_percent)
 max_followers = df["Followers"].max()

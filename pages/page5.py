@@ -1,12 +1,10 @@
 import streamlit as st
-import networkx as nx
-import matplotlib.pyplot as plt
 import plotly.graph_objects as go
 import pandas as pd
 from helpful import format_followers, format_percent, RELIGIOUS_COLORS,RELIGIOUS_COLORS_LIGHT
 
 st.title(":material/counter_5: Branches of Religions")
-st.write("What are sub-religions or denominations within major religions?")
+st.write("What are sub-religions or denosminations within major religions?")
 
 vis,fil = st.columns([6,2])
 cdf: pd.DataFrame = st.session_state.cdf
@@ -24,6 +22,7 @@ if country != "All Countries":
 if religions:
     cdf = cdf[cdf["Religion"].isin(religions)]
 cdf = cdf[(cdf["Year"] == year)]
+cdf = cdf[cdf["Followers"]>0]
 
 df = cdf.groupby(["Religion", "Subreligion"])["Followers"].sum().reset_index()
 df["ReligionFollowers"] = df.apply(
@@ -32,15 +31,15 @@ df["ReligionFollowers"] = df.apply(
 )
 df = df.sort_values(by = ["ReligionFollowers","Followers"], ascending=False)
 df["SubreligionNode"] = df["Religion"] + "-" + df["Subreligion"]
-df["Percent_All"] = round((df["Followers"] / df["Followers"].sum()) * 100,2)
+df["Percent_All"] = (df["Followers"] / df["Followers"].sum())
 df["Percent_Religion"] = df.apply(
-    lambda row: round((row["Followers"] / df[df["Religion"] == row["Religion"]]["Followers"].sum()) * 100, 2), 
+    lambda row: (row["Followers"] / df[df["Religion"] == row["Religion"]]["Followers"].sum()), 
     axis=1
 )
 df["Formatted_Followers"] = df["Followers"].apply(format_followers)
 df["Formatted_Percent_All"] = df["Percent_All"].apply(format_percent)
 df["Formatted_Percent_Religion"] = df["Percent_Religion"].apply(format_percent)
-df["Width"] = df["Percent_All"].apply(lambda x: max(x, 1))
+df["Width"] = df["Percent_All"].apply(lambda x: max(x, 0.01))
 df["Color"] = df["Religion"].map(RELIGIOUS_COLORS)
 nodes = pd.concat([df["Religion"], df["SubreligionNode"]]).unique()
 node_indices = {node: i for i, node in enumerate(nodes)}

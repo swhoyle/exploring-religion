@@ -50,10 +50,11 @@ def format_followers(n):
 def format_percent(n):
     if n is None:
         return None
+    n = n * 100
     if n >= 99:
-        return f"{n:.1f}%"
+        return f"{n:.2f}%"
     elif n < 1:
-        return f"{n:.1f}%"
+        return f"{n:.2f}%"
     else:
         return f"{n:.0f}%"
     
