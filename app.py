@@ -14,9 +14,10 @@ def get_data():
     gdf = pd.read_csv("data/global.csv")
     ndf = pd.read_csv("data/national.csv")
     rdf = pd.read_csv("data/regional.csv")
-    return gdf, ndf, rdf
+    cdf = pd.read_csv("data/cleaned.csv")
+    return gdf, ndf, rdf, cdf
 
-session.gdf, session.ndf, session.rdf = get_data()
+session.gdf, session.ndf, session.rdf, session.cdf = get_data()
 
 pages = [
         st.Page("pages/home.py", title="Home", icon = ":material/home:"),
