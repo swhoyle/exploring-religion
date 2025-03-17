@@ -44,11 +44,11 @@ df["Color"] = df["Religion"].map(RELIGIOUS_COLORS)
 nodes = pd.concat([df["Religion"], df["SubreligionNode"]]).unique()
 node_indices = {node: i for i, node in enumerate(nodes)}
 
-# Source and target indices for Sankey diagram
+
+# Sankey Diagram
 source = df["Religion"].map(node_indices)
 target = df["SubreligionNode"].map(node_indices)
 
-# Create the Sankey Diagram
 fig = go.Figure(data=[go.Sankey(
     arrangement = "snap",
     textfont = dict(

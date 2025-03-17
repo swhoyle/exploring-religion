@@ -15,9 +15,11 @@ def get_data():
     ndf = pd.read_csv("data/national.csv")
     rdf = pd.read_csv("data/regional.csv")
     cdf = pd.read_csv("data/cleaned.csv")
-    return gdf, ndf, rdf, cdf
+    bdf = pd.read_csv("data/beliefs.csv")
+    bdf["Key Practices"] = bdf["Key Practices"].apply(lambda x: x.strip("[]").replace("'", "").split(", "))
+    return gdf, ndf, rdf, cdf, bdf
 
-session.gdf, session.ndf, session.rdf, session.cdf = get_data()
+session.gdf, session.ndf, session.rdf, session.cdf, session.bdf = get_data()
 
 pages = [
         st.Page("pages/home.py", title="Home", icon = ":material/home:"),

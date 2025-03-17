@@ -36,7 +36,6 @@ RELIGIOUS_COLORS_LIGHT = {
     "Other Religion": "#c1d9e9"
 }
 
-
 def format_followers(n):
     if n >= 1_000_000_000:
         return f"{n / 1_000_000_000:.2f} Billion"
